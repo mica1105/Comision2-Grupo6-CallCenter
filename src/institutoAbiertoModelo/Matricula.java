@@ -1,31 +1,24 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package institutoAbiertoModelo;
 
-import java.time.LocalDate;
+import java.sql.Date;
 
-/**
- *
- * @author Vaio
- */
+
 public class Matricula {
     private int id=-1;
-    private LocalDate fechaInscripcion;
+    private Date fechaInscripcion;
     private int costo;
     private Persona persona;
     private Curso curso;
 
-    public Matricula(LocalDate fechaInscripcion, int costo, Persona persona, Curso curso) {
+    public Matricula(Date fechaInscripcion, int costo, Persona persona, Curso curso) {
         this.fechaInscripcion = fechaInscripcion;
         this.costo = costo;
         this.persona = persona;
         this.curso = curso;
     }
 
-    public Matricula(int id, LocalDate fechaInscripcion, int costo, Persona persona, Curso curso) {
+    public Matricula(int id, Date fechaInscripcion, int costo, Persona persona, Curso curso) {
         this.id = id;
         this.fechaInscripcion = fechaInscripcion;
         this.costo = costo;
@@ -43,11 +36,11 @@ public class Matricula {
         this.id = id;
     }
 
-    public LocalDate getFechaInscripcion() {
+    public Date getFechaInscripcion() {
         return fechaInscripcion;
     }
 
-    public void setFechaInscripcion(LocalDate fechaInscripcion) {
+    public void setFechaInscripcion(Date fechaInscripcion) {
         this.fechaInscripcion = fechaInscripcion;
     }
 
