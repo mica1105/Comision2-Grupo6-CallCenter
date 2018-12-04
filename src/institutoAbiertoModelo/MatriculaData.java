@@ -89,6 +89,7 @@ public class MatriculaData {
    
 
             List<Matricula> matriculas = new ArrayList<Matricula>();
+          
 
      try {
 
@@ -146,28 +147,7 @@ public class MatriculaData {
 
      }
 
-    
-
-    public Persona buscarPersona (int id) {
-
-     PersonaData pd = new PersonaData (conexion);
-
-     return pd.buscarPersona(id);
-
-}
-
- 
-
-     public Curso buscarCurso(int id){
-
-     CursoData cd=new CursoData(conexion);
-
-     return cd.buscarCurso(id);
-
-}
-
-    
-
+  
      public List<Matricula> obtenerMatriculaXPersona(int id){
 
         List<Matricula> matriculas = new ArrayList<Matricula>();
@@ -224,5 +204,102 @@ public class MatriculaData {
 
         return matriculas;       
 }
+     
+     public List<Matricula> obtenerMatriculasXCurso(int id){
+
+            List<Matricula> matriculas = new ArrayList<Matricula>();
+          
+
+     try {
+
+            String sql = "SELECT * FROM matricula WHERE idCurso = ?;";
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            Matricula matricula;
+
+           
+
+        while(resultSet.next()){
+
+            matricula = new Matricula();
+
+            matricula.setId(resultSet.getInt("id"));
+
+            matricula.setFechaInscripcion(resultSet.getDate("fechaInscripcion"));
+
+            matricula.setCosto(resultSet.getInt("costo"));
+       
+            
+            Curso c = buscarCurso(resultSet.getInt("idCurso"));
+
+             matricula.setCurso(c);
+             
+             Persona p = buscarPersona(resultSet.getInt("idPersona"));
+
+            matricula.setPersona(p);
+
+           
+            matriculas.add(matricula);
+
+        }
+
+             statement.close();
+
+           
+
+            } catch (SQLException ex) {
+
+            System.out.println("Error: " + ex.getMessage());
+
+        }
+
+           
+
+         return matriculas;
+
+        
+
+     }
+      public Persona buscarPersona (int id) {
+
+     PersonaData pd = new PersonaData (conexion);
+
+     return pd.buscarPersona(id);
+
+}
+
+ 
+
+     public Curso buscarCurso(int id){
+
+     CursoData cd=new CursoData(conexion);
+
+     return cd.buscarCurso(id);
+
+}
+     public void borrarMatriculaDeUnCursoDeunaPersona(int idPersona,int idCurso){
+    
+        try {
+            
+            String sql = "DELETE FROM matricula WHERE idPersona =? and idCurso =?;";
+
+            PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            statement.setInt(1, idPersona);
+            statement.setInt(2, idCurso);
+           
+            
+            statement.executeUpdate();
+            
+            
+            statement.close();
+    
+        } catch (SQLException ex) {
+            System.out.println("Error al insertar persona: " + ex.getMessage());
+        }
+        
+    }
 }
 

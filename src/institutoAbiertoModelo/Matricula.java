@@ -2,6 +2,8 @@
 package institutoAbiertoModelo;
 
 import java.sql.Date;
+import java.util.List;
+import java.util.function.Consumer;
 
 
 public class Matricula {
@@ -67,6 +69,6 @@ public class Matricula {
     public void setCurso(Curso curso) {
         this.curso = curso;
     }
-    
- 
+
 }
+
