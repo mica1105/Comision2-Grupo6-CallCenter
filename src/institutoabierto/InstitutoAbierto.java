@@ -4,6 +4,8 @@ package institutoabierto;
 import institutoAbiertoModelo.Conexion;
 import institutoAbiertoModelo.Curso;
 import institutoAbiertoModelo.CursoData;
+import institutoAbiertoModelo.Matricula;
+import institutoAbiertoModelo.MatriculaData;
 import institutoAbiertoModelo.Persona;
 import institutoAbiertoModelo.PersonaData;
 
@@ -24,6 +26,18 @@ public class InstitutoAbierto {
      
         
      // TODO code application logic here
-    }
+    
+    
+     Curso curso1 = new Curso ("Matematicas", "Sistema de ecuaciones", 40, 200, persona1);
+     con = new Conexion();
+     CursoData cd = new CursoData (con);
+    
+    cd.guardarCurso(curso1);
+    
+    System.out.println("Nuevo Curso id: "+curso1.getId());
+    
+    
+    
+}
 }
 
