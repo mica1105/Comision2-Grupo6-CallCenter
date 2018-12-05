@@ -78,7 +78,7 @@ public class PersonaData {
      public void borrarPersona(int id_Persona){
            try {
             
-            String sql = "DELETE FROM persona WHERE id =?;";
+            String sql = "DELETE FROM persona WHERE id_persona =?;";
 
             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setInt(1, id_Persona);
@@ -98,7 +98,7 @@ public class PersonaData {
     Persona persona=null;
     try {
             
-            String sql = "SELECT * FROM persona WHERE id =?;";
+            String sql = "SELECT * FROM persona WHERE id_persona =?;";
 
             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setInt(1, id_Persona);

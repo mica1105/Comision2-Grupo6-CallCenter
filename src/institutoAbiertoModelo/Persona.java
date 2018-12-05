@@ -2,13 +2,13 @@
 package institutoAbiertoModelo;
 
 public class Persona {
-    private int id = -1;
+    private int id=-1;
     private String nombre;
     private int dni;
     private int celular;
 
     public Persona(int id, String nombre, int dni, int celular) {
-        this.id = id;
+        this.id = -1;
         this.nombre = nombre;
         this.dni = dni;
         this.celular = celular;
@@ -21,7 +21,10 @@ public class Persona {
         this.celular = celular;
     }
     public Persona (){}
-
+    
+    public Persona (int id){
+            this.id = id;
+    }
     public int getId() {
         return id;
     }
@@ -52,6 +55,11 @@ public class Persona {
 
     public void setCelular(int celular) {
         this.celular = celular;
+    }
+    @Override
+     public String toString(){
+    
+        return id+"-"+nombre;
     }
     
 }

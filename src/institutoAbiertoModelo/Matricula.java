@@ -4,23 +4,24 @@ package institutoAbiertoModelo;
 import java.sql.Date;
 import java.util.List;
 import java.util.function.Consumer;
+import java.time.LocalDate;
 
 
 public class Matricula {
     private int id=-1;
-    private Date fechaInscripcion;
+    private LocalDate fechaInscripcion;
     private int costo;
     private Persona persona;
     private Curso curso;
 
-    public Matricula(Date fechaInscripcion, int costo, Persona persona, Curso curso) {
+    public Matricula(LocalDate fechaInscripcion, int costo, Persona persona, Curso curso) {
         this.fechaInscripcion = fechaInscripcion;
         this.costo = costo;
         this.persona = persona;
         this.curso = curso;
     }
 
-    public Matricula(int id, Date fechaInscripcion, int costo, Persona persona, Curso curso) {
+    public Matricula(int id, LocalDate fechaInscripcion, int costo, Persona persona, Curso curso) {
         this.id = id;
         this.fechaInscripcion = fechaInscripcion;
         this.costo = costo;
@@ -30,6 +31,9 @@ public class Matricula {
     
     public Matricula () {}
     
+    public Matricula (int id){
+        this.id = id;
+    }
     public int getId() {
         return id;
     }
@@ -38,11 +42,11 @@ public class Matricula {
         this.id = id;
     }
 
-    public Date getFechaInscripcion() {
+    public LocalDate getFechaInscripcion() {
         return fechaInscripcion;
     }
 
-    public void setFechaInscripcion(Date fechaInscripcion) {
+    public void setFechaInscripcion(LocalDate fechaInscripcion) {
         this.fechaInscripcion = fechaInscripcion;
     }
 

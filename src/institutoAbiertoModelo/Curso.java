@@ -75,4 +75,9 @@ public class Curso {
     public void setPersona(Persona persona) {
         this.persona = persona;
  }    
+    @Override
+    public String toString(){
+    
+        return id+"-"+nombre;
+    }
 }

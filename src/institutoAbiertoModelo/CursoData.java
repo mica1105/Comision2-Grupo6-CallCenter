@@ -8,12 +8,15 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class CursoData {
  private Connection connection = null;
-
     private Conexion conexion;
+    private boolean cantMat;
+    private boolean cupo;
 
     public CursoData(Conexion conexion) {
 
@@ -33,7 +36,7 @@ public class CursoData {
 
         try {
 
-            String sql = "INSERT INTO curso (nombre, descripcion, cupo, costo, persona) VALUES ( ? , ? , ? , ? , ?);";
+            String sql = "INSERT INTO curso (nombre, descripcion, cupo, costo, id_persona) VALUES ( ? , ? , ? , ? , ?);";
 
             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
@@ -113,7 +116,7 @@ public class CursoData {
 
                
 
-                Persona p = buscarPersona(resultSet.getInt("idpersona"));
+                Persona p = buscarPersona(resultSet.getInt("id_persona"));
 
                 curso.setPersona(p);
 
@@ -137,7 +140,7 @@ public class CursoData {
 
 }
 
-     public List<Curso> obtenerCursosXPersona(int id) {
+     public List<Curso> obtenerCursosXPersona(int id_persona) {
 
       
 
@@ -147,11 +150,11 @@ public class CursoData {
 
                 
 
-            String sql = "SELECT * FROM curso WHERE idPersona = ?;";
+            String sql = "SELECT * FROM curso WHERE id_Persona = ?;";
 
             PreparedStatement statement = connection.prepareStatement(sql);
 
-            statement.setInt(1,id);
+            statement.setInt(1,id_persona);
 
             ResultSet resultSet = statement.executeQuery();
 
@@ -161,7 +164,7 @@ public class CursoData {
 
                 curso = new Curso ();
 
-                curso.setId(resultSet.getInt("id"));
+                curso.setId(resultSet.getInt("id_persona"));
 
                 curso.setNombre(resultSet.getString("nombre"));
 
@@ -171,7 +174,7 @@ public class CursoData {
 
                 curso.setCosto(resultSet.getInt("costo"));
 
-                Persona p=buscarPersona(resultSet.getInt("idPersona"));
+                Persona p=buscarPersona(resultSet.getInt("id_Persona"));
 
                 curso.setPersona(p);
 
@@ -195,7 +198,7 @@ public class CursoData {
 
      }
 
-     public Persona buscarPersona(int id){
+     public Persona buscarPersona(int id_persona){
 
    
 
@@ -203,25 +206,25 @@ public class CursoData {
 
        
 
-        return pd.buscarPersona(id);
+        return pd.buscarPersona(id_persona);
 
     
 
      }
 
-     public Curso buscarCurso (int id){
+     public Curso buscarCurso (int id_curso){
 
          Curso curso=null;
 
          try {
 
-         String sql = "SELECT * FROM curso WHERE id =?;";
+         String sql = "SELECT * FROM curso WHERE id_curso =?;";
 
          
 
      PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
-     statement.setInt(1, id);
+     statement.setInt(1, id_curso);
 
                 
 
@@ -259,5 +262,38 @@ public class CursoData {
 
         return curso; 
 
-}    
 }
+     public boolean disponibilidad(){
+          
+   
+         String sql = "SELECT COUNT(*) FROM curso, matricula WHERE curso.id_Curso and matricula.id_Curso AND curso.id_Curso = ?;";
+         int cupo = 0;
+         int cantMat = 0;
+         
+         try {
+         PreparedStatement statement = connection.prepareStatement(sql);
+         
+         ResultSet rs = statement.executeQuery();
+         
+         rs.next();
+         
+         cantMat = rs.getInt(1);
+         
+         sql = "SELECT cupo FROM curso WHERE curoso.id_Curso=?;";
+         rs = statement.executeQuery();
+         rs.next();
+         
+         cupo = rs.getInt(1);
+         
+        
+     } catch (SQLException ex) {
+         Logger.getLogger(CursoData.class.getName()).log(Level.SEVERE, null, ex);
+     }
+        if (cantMat < cupo){
+            return true;
+        } else { 
+            return false;
+        }
+     
+}
+     }

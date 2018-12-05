@@ -8,6 +8,8 @@ import institutoAbiertoModelo.MatriculaData;
 import institutoAbiertoModelo.Persona;
 import institutoAbiertoModelo.PersonaData;
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.Month;
 
 public class InstitutoAbierto {
 
@@ -35,7 +37,13 @@ public class InstitutoAbierto {
         cd.guardarCurso(curso1);
 
         System.out.println("Nuevo Curso id: " + curso1.getId());
-
         
+       
+        Matricula matricula1 = new Matricula (LocalDate.of(2018, Month.DECEMBER, 01), 200, persona2, curso1);
+        con = new Conexion ();
+        MatriculaData md = new MatriculaData(con);
+        
+        md.guardarMatricula(matricula1);
+            
     }
 }

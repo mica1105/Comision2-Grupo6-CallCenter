@@ -2,10 +2,12 @@
 package institutoAbiertoModelo;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,13 +40,13 @@ public class MatriculaData {
 
         try {
 
-            String sql = "INSERT INTO matricula (fechaInscripcion, costo, idPersona, idCurso) VALUES ( ? , ? , ?, ? );";
+            String sql = "INSERT INTO matricula (fechaInscripcion, costo, id_Persona, id_Curso) VALUES ( ? , ? , ?, ? );";
 
            
 
             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
-            statement.setDate(1, matricula.getFechaInscripcion());
+            statement.setDate(1, Date.valueOf(matricula.getFechaInscripcion()));
 
             statement.setInt(2, matricula.getCosto());
 
@@ -109,17 +111,17 @@ public class MatriculaData {
 
             matricula.setId(resultSet.getInt("id"));
 
-            matricula.setFechaInscripcion(resultSet.getDate("fechaInscripcion"));
+            matricula.setFechaInscripcion(resultSet.getDate("fechaInscripcion").toLocalDate());
 
             matricula.setCosto(resultSet.getInt("costo"));
 
            
 
-            Persona p = buscarPersona(resultSet.getInt("idPersona"));
+            Persona p = buscarPersona(resultSet.getInt("id_Persona"));
 
             matricula.setPersona(p);
 
-            Curso c = buscarCurso(resultSet.getInt("idCurso"));
+            Curso c = buscarCurso(resultSet.getInt("id_Curso"));
 
             matricula.setCurso(c);
 
@@ -156,7 +158,7 @@ public class MatriculaData {
 
          try {
 
-        String sql = "SELECT * FROM matricula WHERE idPersona = ?;";
+        String sql = "SELECT * FROM matricula WHERE id_Persona = ?;";
 
             PreparedStatement statement = connection.prepareStatement(sql);
 
@@ -174,17 +176,17 @@ public class MatriculaData {
 
                 matricula.setId(resultSet.getInt("id"));
 
-                matricula.setFechaInscripcion(resultSet.getDate("fechaInscripcion"));
+               matricula.setFechaInscripcion(resultSet.getDate("fechaInscripcion").toLocalDate());
 
                 matricula.setCosto(resultSet.getInt("costo"));
 
                
 
-             Persona p = buscarPersona(resultSet.getInt("idPersona"));
+             Persona p = buscarPersona(resultSet.getInt("id_Persona"));
 
              matricula.setPersona(p);
 
-             Curso c = buscarCurso(resultSet.getInt("idCurso"));
+             Curso c = buscarCurso(resultSet.getInt("id_Curso"));
 
              matricula.setCurso(c);
 
@@ -212,7 +214,7 @@ public class MatriculaData {
 
      try {
 
-            String sql = "SELECT * FROM matricula WHERE idCurso = ?;";
+            String sql = "SELECT * FROM matricula WHERE id_Curso = ?;";
 
             PreparedStatement statement = connection.prepareStatement(sql);
 
@@ -228,16 +230,16 @@ public class MatriculaData {
 
             matricula.setId(resultSet.getInt("id"));
 
-            matricula.setFechaInscripcion(resultSet.getDate("fechaInscripcion"));
+            matricula.setFechaInscripcion(resultSet.getDate("fechaInscripcion").toLocalDate());
 
             matricula.setCosto(resultSet.getInt("costo"));
        
             
-            Curso c = buscarCurso(resultSet.getInt("idCurso"));
+            Curso c = buscarCurso(resultSet.getInt("id_Curso"));
 
              matricula.setCurso(c);
              
-             Persona p = buscarPersona(resultSet.getInt("idPersona"));
+             Persona p = buscarPersona(resultSet.getInt("id_Persona"));
 
             matricula.setPersona(p);
 
@@ -280,15 +282,15 @@ public class MatriculaData {
      return cd.buscarCurso(id);
 
 }
-     public void borrarMatriculaDeUnCursoDeunaPersona(int idPersona,int idCurso){
+     public void borrarMatriculaDeUnCursoDeunaPersona(int id_Persona,int id_Curso){
     
         try {
             
-            String sql = "DELETE FROM matricula WHERE idPersona =? and idCurso =?;";
+            String sql = "DELETE FROM matricula WHERE id_Persona =? and id_Curso =?;";
 
             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            statement.setInt(1, idPersona);
-            statement.setInt(2, idCurso);
+            statement.setInt(1, id_Persona);
+            statement.setInt(2, id_Curso);
            
             
             statement.executeUpdate();
@@ -301,5 +303,8 @@ public class MatriculaData {
         }
         
     }
+     
+
 }
+
 
