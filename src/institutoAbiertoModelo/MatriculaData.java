@@ -64,7 +64,7 @@ public class MatriculaData {
 
               if (rs.next()) {
 
-                matricula.setId(rs.getInt(3));
+                matricula.setId(rs.getInt(1));
 
                 } else {
 

@@ -27,6 +27,11 @@ public class Curso {
     }
     
     public Curso () {}    
+    
+    public Curso (int id){
+       this.id = id;
+    
+    }
 
     public int getId() {
         return id;

@@ -8,7 +8,7 @@ public class Persona {
     private int celular;
 
     public Persona(int id, String nombre, int dni, int celular) {
-        this.id = -1;
+        this.id = id;
         this.nombre = nombre;
         this.dni = dni;
         this.celular = celular;

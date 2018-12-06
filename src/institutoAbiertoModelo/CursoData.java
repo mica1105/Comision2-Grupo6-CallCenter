@@ -15,8 +15,6 @@ import java.util.logging.Logger;
 public class CursoData {
  private Connection connection = null;
     private Conexion conexion;
-    private boolean cantMat;
-    private boolean cupo;
 
     public CursoData(Conexion conexion) {
 
@@ -263,14 +261,16 @@ public class CursoData {
         return curso; 
 
 }
-     public boolean disponibilidad(){
+     public boolean disponibilidad(Curso curso){
           
    
-         String sql = "SELECT COUNT(*) FROM curso, matricula WHERE curso.id_Curso and matricula.id_Curso AND curso.id_Curso = ?;";
+         
          int cupo = 0;
          int cantMat = 0;
          
          try {
+             
+         String sql = "SELECT COUNT(*) FROM curso, matricula WHERE curso.id_Curso and matricula.id_Curso AND curso.id_Curso = ?;";     
          PreparedStatement statement = connection.prepareStatement(sql);
          
          ResultSet rs = statement.executeQuery();
@@ -289,11 +289,7 @@ public class CursoData {
      } catch (SQLException ex) {
          Logger.getLogger(CursoData.class.getName()).log(Level.SEVERE, null, ex);
      }
-        if (cantMat < cupo){
-            return true;
-        } else { 
-            return false;
-        }
+     return cantMat < cupo;
      
 }
      }
