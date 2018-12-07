@@ -57,7 +57,7 @@ public class CursoData {
             ResultSet rs = statement.getGeneratedKeys();
 
            
-
+           
             if (rs.next()) {
 
                 curso.setId(rs.getInt(1));
@@ -261,7 +261,7 @@ public class CursoData {
         return curso; 
 
 }
-     public boolean disponibilidad(Curso curso){
+     public boolean hayDisponibilidad(){
           
    
          
@@ -270,7 +270,7 @@ public class CursoData {
          
          try {
              
-         String sql = "SELECT COUNT(*) FROM curso, matricula WHERE curso.id_Curso and matricula.id_Curso AND curso.id_Curso = ?;";     
+         String sql =  "SELECT COUNT(*) FROM curso, matricula WHERE curso.id_Curso = matricula.id_Curso AND curso.id_Curso = ?;";     
          PreparedStatement statement = connection.prepareStatement(sql);
          
          ResultSet rs = statement.executeQuery();

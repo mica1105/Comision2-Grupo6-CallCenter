@@ -7,7 +7,6 @@ import institutoAbiertoModelo.Matricula;
 import institutoAbiertoModelo.MatriculaData;
 import institutoAbiertoModelo.Persona;
 import institutoAbiertoModelo.PersonaData;
-import java.sql.Date;
 import java.time.LocalDate;
 import java.time.Month;
 
@@ -46,7 +45,10 @@ public class InstitutoAbierto {
                 
         MatriculaData md = new MatriculaData(con);
         
+        if(cd.hayDisponibilidad()){
         md.guardarMatricula(matricula1);
-            
+        } else{
+            System.out.println("El Curso seleccionado no cuenta con cupo disponible");
+        }
     }
 }

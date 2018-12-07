@@ -55,20 +55,20 @@ public class MatriculaData {
             statement.setInt(4, matricula.getCurso().getId());
 
            
-
              statement.executeUpdate();
-
             
-
+             
               ResultSet rs = statement.getGeneratedKeys();
-
-              if (rs.next()) {
-
+              
+              
+            
+              if (rs.next()){
+                  
                 matricula.setId(rs.getInt(1));
 
                 } else {
 
-                System.out.println("No se pudo obtener el id luego de insertar una persona");
+                System.out.println("No se encontre el id de la persona");
 
             }
 
