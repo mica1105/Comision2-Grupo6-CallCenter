@@ -30,7 +30,7 @@ public class InstitutoAbierto {
  
         
         // TODO code application logic here
-        Curso curso1 = new Curso(15,"Matematicas", "Sistema de ecuaciones", 500, 200, persona1);
+        Curso curso1 = new Curso("Matematicas", "Sistema de ecuaciones", 500, 200, persona1);
         con = new Conexion();
         CursoData cd = new CursoData(con);
         
@@ -45,7 +45,7 @@ public class InstitutoAbierto {
                 
         MatriculaData md = new MatriculaData(con);
         
-        if(cd.hayDisponibilidad()){
+        if(cd.hayDisponibilidad(curso1.getId())){
         md.guardarMatricula(matricula1);
         } else{
             System.out.println("El Curso seleccionado no cuenta con cupo disponible");

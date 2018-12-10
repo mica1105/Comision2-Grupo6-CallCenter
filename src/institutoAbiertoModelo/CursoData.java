@@ -162,7 +162,7 @@ public class CursoData {
 
                 curso = new Curso ();
 
-                curso.setId(resultSet.getInt("id_persona"));
+                curso.setId(resultSet.getInt("id_Persona"));
 
                 curso.setNombre(resultSet.getString("nombre"));
 
@@ -261,7 +261,7 @@ public class CursoData {
         return curso; 
 
 }
-     public boolean hayDisponibilidad(){
+     public boolean hayDisponibilidad(int id_Curso){
           
    
          
@@ -272,6 +272,7 @@ public class CursoData {
              
          String sql =  "SELECT COUNT(*) FROM curso, matricula WHERE curso.id_Curso = matricula.id_Curso AND curso.id_Curso = ?;";     
          PreparedStatement statement = connection.prepareStatement(sql);
+         statement.setInt(1,id_Curso);
          
          ResultSet rs = statement.executeQuery();
          
