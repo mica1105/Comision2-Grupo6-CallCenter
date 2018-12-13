@@ -34,7 +34,7 @@ public class CursoData {
 
         try {
 
-            String sql = "INSERT INTO curso (nombre, descripcion, cupo, costo, id_persona) VALUES ( ? , ? , ? , ? , ?);";
+            String sql = "INSERT INTO curso (nombre, descripcion, cupo, costo, id_Persona) VALUES ( ? , ? , ? , ? , ?);";
 
             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
@@ -102,7 +102,7 @@ public class CursoData {
 
                 curso = new Curso();
 
-                curso.setId(resultSet.getInt("id"));
+                curso.setId(resultSet.getInt("id_Curso"));
 
                 curso.setNombre(resultSet.getString("nombre"));
 
@@ -162,7 +162,7 @@ public class CursoData {
 
                 curso = new Curso ();
 
-                curso.setId(resultSet.getInt("id_Persona"));
+                curso.setId(resultSet.getInt("id_Curso"));
 
                 curso.setNombre(resultSet.getString("nombre"));
 
@@ -216,7 +216,7 @@ public class CursoData {
 
          try {
 
-         String sql = "SELECT * FROM curso WHERE id_curso =?;";
+         String sql = "SELECT * FROM curso WHERE id_Curso =?;";
 
          
 
@@ -234,7 +234,7 @@ public class CursoData {
 
                      curso = new Curso();
 
-                     curso.setId(resultSet.getInt("id"));
+                     curso.setId(resultSet.getInt("id_Curso"));
 
                      curso.setNombre(resultSet.getString("nombre"));
 
@@ -261,10 +261,30 @@ public class CursoData {
         return curso; 
 
 }
+public void borrarCurso(int id_Curso){
+    try {
+            
+            String sql = "DELETE FROM curso WHERE id_Curso =?;";
+
+            PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            statement.setInt(1, id_Curso);
+           
+            
+            statement.executeUpdate();
+            
+            
+            statement.close();
+    
+        } catch (SQLException ex) {
+            System.out.println("Error al insertar un alumno: " + ex.getMessage());
+        }
+        
+    
+    }
+     
+     
      public boolean hayDisponibilidad(int id_Curso){
-          
-   
-         
+           
          int cupo = 0;
          int cantMat = 0;
          
@@ -280,7 +300,10 @@ public class CursoData {
          
          cantMat = rs.getInt(1);
          
-         sql = "SELECT cupo FROM curso WHERE curoso.id_Curso=?;";
+         sql = "SELECT cupo FROM curso WHERE curso.id_Curso=?;";
+        
+         statement = connection.prepareStatement(sql);
+         statement.setInt(1,id_Curso);
          rs = statement.executeQuery();
          rs.next();
          
@@ -293,4 +316,29 @@ public class CursoData {
      return cantMat < cupo;
      
 }
+         public void actualizarCurso(Curso curso){
+    
+        try {
+            
+            String sql = "UPDATE curso SET nombre = ?, descripcion = ? , cupo =?, costo =?,id_Persona =? WHERE id_Curso = ?;";
+
+            PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            statement.setString(1, curso.getNombre());
+            statement.setString(2,curso.getDescripcion());
+            statement.setInt(3,curso.getCupo());
+            statement.setInt(4,curso.getCosto());
+            statement.setInt(5, curso.getPersona().getId());
+            statement.setInt(6, curso.getId());
+            
+           
+            statement.executeUpdate();
+            
+          
+            statement.close();
+    
+        } catch (SQLException ex) {
+            System.out.println("Error al insertar un alumno: " + ex.getMessage());
+        }
+    
+    }
      }

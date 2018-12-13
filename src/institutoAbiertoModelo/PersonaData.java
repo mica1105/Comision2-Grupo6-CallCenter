@@ -1,4 +1,3 @@
-
 package institutoAbiertoModelo;
 
 import java.sql.Connection;
@@ -29,8 +28,8 @@ public class PersonaData {
             String sql = "INSERT INTO persona (nombre, dni, celular) VALUES ( ? , ? , ? );";
             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, persona.getNombre());
-            statement.setLong(2, persona.getDni());
-            statement.setLong(3, persona.getCelular());
+            statement.setInt(2, persona.getDni());
+            statement.setInt(3, persona.getCelular());
             
             statement.executeUpdate();
             
@@ -94,6 +93,25 @@ public class PersonaData {
         }
             
     }
+      public void actualizarPersona (Persona persona) {
+        try {
+            String sql = "UPDATE persona SET nombre = ?, dni = ? , celular = ? WHERE id_Persona = ?;";
+        
+             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+             statement.setString (1, persona.getNombre());
+             statement.setLong (2, persona.getDni());
+             statement.setLong (3, persona.getCelular());
+             statement.setInt(4, persona.getId());
+             statement.executeUpdate();
+             
+             statement.close();
+             
+        } catch (SQLException ex) {
+            System.out.println("Error al insertar una persona: " + ex.getMessage());
+        }
+      }
+    
+     
      public Persona buscarPersona(int id_Persona){
     Persona persona=null;
     try {
@@ -121,5 +139,5 @@ public class PersonaData {
         return persona;
     }
 }
-    
 
+         
