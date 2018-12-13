@@ -18,6 +18,7 @@ import java.util.logging.Logger;
    public class VistaPersona extends javax.swing.JInternalFrame {
        private PersonaData personaData;
        private Conexion conexion;
+       
     /**
      * Creates new form VistaPersona
      */
