@@ -13,9 +13,11 @@ import java.util.List;
 
 public class PersonaData {
     private Connection connection = null;
+    private Conexion conexion;
        
     public PersonaData (Conexion conexion) {
         try {
+            this.conexion=conexion;
             connection = conexion.getConexion();
         } catch (SQLException ex) {
             Logger.getLogger(PersonaData.class.getName()).log(Level.SEVERE, null, ex);
@@ -59,7 +61,7 @@ public class PersonaData {
             
             while(resultSet.next()){
                 persona = new Persona();
-                persona.setId(resultSet.getInt("id_Perona"));
+                persona.setId(resultSet.getInt("id_Persona"));
                 persona.setNombre(resultSet.getString("nombre"));
                 persona.setDni(resultSet.getInt("dni"));
                 persona.setCelular(resultSet.getInt("celular"));

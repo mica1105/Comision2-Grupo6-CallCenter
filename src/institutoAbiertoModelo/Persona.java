@@ -20,7 +20,8 @@ public class Persona {
         this.dni = dni;
         this.celular = celular;
     }
-    public Persona (){}
+    public Persona (){
+    }
     
     public Persona (int id){
             this.id = id;

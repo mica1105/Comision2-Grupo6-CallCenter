@@ -8,7 +8,7 @@ import java.time.LocalDate;
 
 
 public class Matricula {
-    private int id=-1;
+    private int id =-1;
     private LocalDate fechaInscripcion;
     private int costo;
     private Persona persona;

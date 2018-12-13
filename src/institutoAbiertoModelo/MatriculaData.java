@@ -14,19 +14,16 @@ import java.util.List;
 
 
 public class MatriculaData {
-  private Connection connection = null;
-
+     private Connection connection = null;
      private Conexion conexion;
 
     
-
      public MatriculaData (Conexion conexion){
-
-         try {
-
-          connection = conexion.getConexion();
-
-        } catch (SQLException ex) {
+          try {
+         this.conexion=conexion;
+         connection = conexion.getConexion();
+        
+        this.conexion=conexion;} catch (SQLException ex) {
 
             System.out.println("Error al abrir al obtener la conexion");
 

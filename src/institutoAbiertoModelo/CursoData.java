@@ -14,12 +14,12 @@ import java.util.logging.Logger;
 
 public class CursoData {
  private Connection connection = null;
-    private Conexion conexion;
+ private Conexion conexion;
 
     public CursoData(Conexion conexion) {
 
         try {
-
+            this.conexion=conexion;
             connection = conexion.getConexion();
 
         } catch (SQLException ex) {
@@ -196,7 +196,7 @@ public class CursoData {
 
      }
 
-     public Persona buscarPersona(int id_persona){
+     public Persona buscarPersona(int id_Persona){
 
    
 
@@ -204,13 +204,13 @@ public class CursoData {
 
        
 
-        return pd.buscarPersona(id_persona);
+        return pd.buscarPersona(id_Persona);
 
     
 
      }
 
-     public Curso buscarCurso (int id_curso){
+     public Curso buscarCurso (int id_Curso){
 
          Curso curso=null;
 
@@ -222,14 +222,11 @@ public class CursoData {
 
      PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
-     statement.setInt(1, id_curso);
-
+     statement.setInt(1, id_Curso);
                 
-
        ResultSet resultSet=statement.executeQuery();
 
-                
-
+        
                  while(resultSet.next()){
 
                      curso = new Curso();
@@ -243,12 +240,11 @@ public class CursoData {
                      curso.setCupo(resultSet.getInt("cupo"));
 
                      curso.setCosto(resultSet.getInt("costo"));
+                     
+                     Persona p = buscarPersona(resultSet.getInt("id_Persona"));
 
-                    
-
+                      curso.setPersona(p);  
                  }
-
-                
 
                  statement.close();
 
