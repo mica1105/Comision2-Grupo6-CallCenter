@@ -218,8 +218,6 @@ public class CursoData {
 
          String sql = "SELECT * FROM curso WHERE id_Curso =?;";
 
-         
-
      PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
      statement.setInt(1, id_Curso);
