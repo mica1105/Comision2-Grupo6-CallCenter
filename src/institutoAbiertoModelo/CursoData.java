@@ -114,7 +114,7 @@ public class CursoData {
 
                
 
-                Persona p = buscarPersona(resultSet.getInt("id_persona"));
+                Persona p = buscarPersona(resultSet.getInt("id_Persona"));
 
                 curso.setPersona(p);
 

@@ -266,15 +266,15 @@ public class VistaMatricula extends javax.swing.JInternalFrame {
 
     private void btBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarActionPerformed
         // TODO add your handling code here:
-        int id = Integer.parseInt(jtId.getText());
-        System.out.println("id_Matricula"+id);
-        Matricula matricula= matriculaData.buscarMatricula(id);
+        int id_Matricula = Integer.parseInt(jtId.getText());
+        System.out.println("id_Matricula"+id_Matricula);
+        Matricula matricula= matriculaData.buscarMatricula(id_Matricula);
         if(matricula!=null){
                 jtId.setText(matricula.getId()+"");
                 jtFecha.setText(matricula.getFechaInscripcion().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
                 jtCosto.setText(matricula.getCosto()+"");
                 cbPersonas.setSelectedItem(matricula.getPersona().getId()+"-"+matricula.getPersona().getNombre());
-                cbCursos.setSelectedItem(matricula.getCurso().getId()+matricula.getCurso().getNombre());
+                cbCursos.setSelectedItem(matricula.getCurso().getId()+"-"+matricula.getCurso().getNombre());
                 //Persona p=(Persona)Responsable.getSelectedItem();
     }//GEN-LAST:event_btBuscarActionPerformed
     }

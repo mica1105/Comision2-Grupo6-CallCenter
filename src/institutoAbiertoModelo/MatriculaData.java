@@ -59,7 +59,7 @@ public class MatriculaData {
             System.out.println("Error al insertar una persona: " + ex.getMessage());
      }
    }
-      public Matricula buscarMatricula (int id){
+      public Matricula buscarMatricula (int id_Matricula){
           Matricula matricula =null;
 
          try {
@@ -70,7 +70,7 @@ public class MatriculaData {
 
      PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
-     statement.setInt(1, id);
+     statement.setInt(1, id_Matricula);
                 
        ResultSet resultSet=statement.executeQuery();
 
@@ -78,7 +78,7 @@ public class MatriculaData {
                  while(resultSet.next()){
 
                      matricula = new Matricula();
-            matricula.setId(resultSet.getInt("id"));
+            matricula.setId(resultSet.getInt("id_Matricula"));
             matricula.setFechaInscripcion(resultSet.getDate("fechaInscripcion").toLocalDate());
             matricula.setCosto(resultSet.getInt("costo"));
             Persona p = buscarPersona(resultSet.getInt("id_Persona"));
@@ -111,7 +111,7 @@ public class MatriculaData {
 
         while(resultSet.next()){
             matricula = new Matricula();
-            matricula.setId(resultSet.getInt("id"));
+            matricula.setId(resultSet.getInt("id_Matricula"));
             matricula.setFechaInscripcion(resultSet.getDate("fechaInscripcion").toLocalDate());
             matricula.setCosto(resultSet.getInt("costo"));
             Persona p = buscarPersona(resultSet.getInt("id_Persona"));
@@ -162,21 +162,21 @@ public class MatriculaData {
 }
      
   
-      public Persona buscarPersona (int id) {
+      public Persona buscarPersona (int id_Persona) {
 
      PersonaData pd = new PersonaData (conexion);
 
-     return pd.buscarPersona(id);
+     return pd.buscarPersona(id_Persona);
 
 }
 
  
 
-     public Curso buscarCurso(int id){
+     public Curso buscarCurso(int id_Curso){
 
      CursoData cd=new CursoData(conexion);
 
-     return cd.buscarCurso(id);
+     return cd.buscarCurso(id_Curso);
 
 }
      public void borrarMatriculaDeUnCursoDeunaPersona(int id_Persona,int id_Curso){
