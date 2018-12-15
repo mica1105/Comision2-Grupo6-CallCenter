@@ -44,7 +44,7 @@ public class VistaMatricula extends javax.swing.JInternalFrame {
             personaData = new PersonaData(conexion);
             listaPersonas=(ArrayList)personaData.obtenerPersonas();
             cursoData= new CursoData(conexion);
-            listaCursos=(ArrayList)cursoData.obtenerCursos();
+            listaCursos=(ArrayList)cursoData.obtenerCursosConCupo();
             //Método encargado de llenar el combobox
             cargarPersonas();
             cargarCursos ();
@@ -244,7 +244,9 @@ public class VistaMatricula extends javax.swing.JInternalFrame {
         Persona p=(Persona)cbPersonas.getSelectedItem();
         Curso c= (Curso) cbCursos.getSelectedItem();
        Matricula matricula = new Matricula (fechaInscripcion,costo, p, c);
-       matriculaData.guardarMatricula(matricula);
+       if(cursoData.hayDisponibilidad(c.getId())){
+        matriculaData.guardarMatricula(matricula);
+       }
        jtId.setText(matricula.getId()+"");
     }//GEN-LAST:event_btGuardarActionPerformed
 

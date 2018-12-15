@@ -201,12 +201,12 @@ public class MatriculaData {
         
     }
     public List<Curso> obtenerCursosMatriculados(int id){
-    List<Curso> cursos = new ArrayList<Curso>();
+    
+        List<Curso> cursos = new ArrayList<Curso>();
             
-
         try {
-            String sql = "SELECT id_Curso, nombre FROM matricula, curso WHERE matricula.id_Curso = curso.id_Curso\n" +
-"and matricula.id_Persona = ?;";
+            String sql = "SELECT id_Curso, nombre, cupo, costo FROM matricula, curso WHERE matricula.id_Curso = curso.id_Curso\n"
+                    +" AND matricula.id_Persona = ?;";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
@@ -232,8 +232,8 @@ public class MatriculaData {
             
 
         try {
-            String sql = "Select * from curso where id not in "
-                    + "(select id_Curso from matricula where id_Persona =?);";
+            String sql = "SELECT id_Curso, nombre, cupo, costo FROM curso WHERE id not in"
+                    +"(SELECT id_Curso FROM matricula WHERE id_Persona = ;)";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();

@@ -117,11 +117,9 @@ public class CursoData {
                 Persona p = buscarPersona(resultSet.getInt("id_Persona"));
 
                 curso.setPersona(p);
-
                
-
                 Cursos.add(curso);
-
+              
             }
 
             statement.close();
@@ -131,12 +129,68 @@ public class CursoData {
            System.out.println("Error al obtener el curso: " + ex.getMessage());
 
         }
-
+        
             return Cursos;
 
        
 
 }
+     public List <Curso> obtenerCursosConCupo(){
+          
+      List<Curso>Cursos = new ArrayList<Curso>();
+
+            try {
+
+            String sql = "SELECT * FROM curso;";
+
+            PreparedStatement statement = connection.prepareStatement(sql);          
+
+            ResultSet resultSet = statement.executeQuery();
+
+            Curso curso;
+
+           
+
+            while(resultSet.next()){
+
+                curso = new Curso();
+
+                curso.setId(resultSet.getInt("id_Curso"));
+
+                curso.setNombre(resultSet.getString("nombre"));
+
+                curso.setDescripcion(resultSet.getString("descripcion"));
+
+                curso.setCupo(resultSet.getInt("cupo"));
+
+                curso.setCosto(resultSet.getInt("costo"));
+
+               
+
+                Persona p = buscarPersona(resultSet.getInt("id_Persona"));
+
+                curso.setPersona(p);
+
+               CursoData cd= new CursoData(conexion);
+               
+              if (cd.hayDisponibilidad(curso.getId())){
+               
+
+                Cursos.add(curso);
+              }
+            }
+
+            statement.close();
+
+            } catch (SQLException ex) {
+
+           System.out.println("Error al obtener el curso: " + ex.getMessage());
+
+        }
+        
+            return Cursos;   
+         
+     }
 
      public List<Curso> obtenerCursosXPersona(int id_persona) {
 

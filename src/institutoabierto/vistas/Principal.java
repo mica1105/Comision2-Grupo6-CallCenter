@@ -49,6 +49,7 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenu13 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -151,6 +152,14 @@ public class Principal extends javax.swing.JFrame {
         });
         jMenu13.add(jMenuItem5);
 
+        jMenuItem3.setText("Listado de Cursos Disponibles");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu13.add(jMenuItem3);
+
         jMenuBar1.add(jMenu13);
 
         setJMenuBar(jMenuBar1);
@@ -213,6 +222,16 @@ public class Principal extends javax.swing.JFrame {
         escritorio.moveToFront(vpc);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+        escritorio.removeAll();
+        escritorio.repaint();
+        VistaListaDeCursos vlc=new VistaListaDeCursos();
+          vlc.setVisible(true);
+        escritorio.add(vlc);
+        escritorio.moveToFront(vlc);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -269,6 +288,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar3;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     // End of variables declaration//GEN-END:variables
