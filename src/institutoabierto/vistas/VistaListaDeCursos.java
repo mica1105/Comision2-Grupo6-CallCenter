@@ -36,8 +36,9 @@ public class VistaListaDeCursos extends javax.swing.JInternalFrame {
     private Conexion conexion;
     
     public VistaListaDeCursos() {
+        initComponents();
         try {
-            initComponents();
+            
             conexion = new Conexion("jdbc:mysql://localhost/InstitutoAbierto", "root", "");
             modelo=new DefaultTableModel();
             
@@ -50,10 +51,10 @@ public class VistaListaDeCursos extends javax.swing.JInternalFrame {
             
             personaData=new PersonaData(conexion);
             listaPersonas=(ArrayList)personaData.obtenerPersonas();
+           
             cargarPersonas();
             armaCabeceraTabla();
-            cargarDatosNoMatriculados();
-            cargarDatosMatriculados();
+            
             
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(VistaListaDeCursos.class.getName()).log(Level.SEVERE, null, ex);
@@ -225,6 +226,7 @@ public void armaCabeceraTabla(){
         ArrayList<Object> columnas=new ArrayList<Object>();
         columnas.add("ID");
         columnas.add("Nombre");
+        columnas.add("Descripcion");
         columnas.add("Cupo");
         columnas.add("Costo");
         for(Object it:columnas){
@@ -249,10 +251,10 @@ public void cargarDatosNoMatriculados(){
           //Llenar filas
         MatriculaData md =new MatriculaData(conexion);
         Persona seleccionado=(Persona)cbPersona.getSelectedItem();
-        listaCursos = (ArrayList)md.obtenerCursosNOMatriculados(seleccionado.getId());
+        listaCursos = (ArrayList)md.obtenerCursosNoMatriculados(seleccionado.getId());
         for(Curso c:listaCursos){
         
-            modelo.addRow(new Object[]{c.getId(),c.getNombre(),c.getCupo(),c.getCosto()});
+            modelo.addRow(new Object[]{c.getId(),c.getNombre(),c.getDescripcion(),c.getCupo(),c.getCosto()});
                 
         }   
     }
@@ -265,7 +267,7 @@ public void cargarDatosMatriculados(){
         listaCursos = (ArrayList)md.obtenerCursosMatriculados(seleccionado.getId());
         for(Curso c:listaCursos){
         
-            modelo.addRow(new Object[]{c.getId(),c.getNombre(),c.getCupo(),c.getCosto()});
+            modelo.addRow(new Object[]{c.getId(),c.getNombre(),c.getDescripcion(),c.getCupo(),c.getCosto()});
                 
         }   
     }
