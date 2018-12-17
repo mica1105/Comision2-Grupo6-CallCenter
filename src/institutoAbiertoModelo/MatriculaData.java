@@ -199,7 +199,7 @@ public class MatriculaData {
         }
         
     }
-    public List<Curso> obtenerCursosMatriculados(int id_Matricula){
+    public List<Curso> obtenerCursosMatriculados(int id_Persona){
     List<Curso> cursos = new ArrayList<Curso>();
             
 
@@ -207,7 +207,7 @@ public class MatriculaData {
             String sql = "SELECT id_Curso, nombre, descripcion, cupo,costo FROM matricula, curso WHERE matricula.id_Curso = curso.id_Curso\n" +
 "and matricula.id_Persona = ?;";
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setInt(1, id_Matricula);
+            statement.setInt(1, id_Persona);
             ResultSet resultSet = statement.executeQuery();
             Curso curso;
             while(resultSet.next()){
@@ -229,7 +229,7 @@ public class MatriculaData {
       
     }
     
-    public List<Curso> obtenerCursosNoMatriculados(int id_Matricula){
+    public List<Curso> obtenerCursosNoMatriculados(int id_Persona){
     List<Curso> cursos = new ArrayList<Curso>();
             
 
@@ -237,7 +237,7 @@ public class MatriculaData {
             String sql = "Select id_Curso, nombre, descripcion, cupo,costo from curso where id not in "
                     + "(select id_curso from matricula where id_Persona = ?);";
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setInt(1, id_Matricula);
+            statement.setInt(1, id_Persona);
             ResultSet resultSet = statement.executeQuery();
             Curso curso;
             while(resultSet.next()){

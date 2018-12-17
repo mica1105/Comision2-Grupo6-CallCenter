@@ -95,6 +95,8 @@ public class Principal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        escritorio.setBackground(new java.awt.Color(102, 102, 255));
+
         javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
         escritorio.setLayout(escritorioLayout);
         escritorioLayout.setHorizontalGroup(
@@ -103,11 +105,14 @@ public class Principal extends javax.swing.JFrame {
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
+            .addGap(0, 281, Short.MAX_VALUE)
         );
+
+        jMenuBar1.setForeground(new java.awt.Color(102, 0, 102));
 
         jMenu1.setText("Alumnos");
 
+        jMenuItem1.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
         jMenuItem1.setText("Formulario  de Ingreso");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -120,6 +125,7 @@ public class Principal extends javax.swing.JFrame {
 
         jMenu9.setText("Curso");
 
+        jMenuItem2.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
         jMenuItem2.setText("Alta Curso");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -132,6 +138,7 @@ public class Principal extends javax.swing.JFrame {
 
         jMenu10.setText("Matricula");
 
+        jMenuItem4.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
         jMenuItem4.setText("Matriculación");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -144,6 +151,7 @@ public class Principal extends javax.swing.JFrame {
 
         jMenu13.setText("Consultas");
 
+        jMenuItem5.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
         jMenuItem5.setText("Personas por Curso");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -152,6 +160,7 @@ public class Principal extends javax.swing.JFrame {
         });
         jMenu13.add(jMenuItem5);
 
+        jMenuItem3.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
         jMenuItem3.setText("Listado de Cursos Disponibles");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -174,7 +183,7 @@ public class Principal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
+            .addGap(0, 281, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(escritorio))
         );
