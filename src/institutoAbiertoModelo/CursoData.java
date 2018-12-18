@@ -368,25 +368,23 @@ public void borrarCurso(int id_Curso){
     
         try {
             
-            String sql = "UPDATE curso SET nombre = ?, descripcion = ? , cupo =?, costo =?,id_Persona =? WHERE id_Curso = ?;";
+        String sql = "UPDATE curso SET nombre = ?, descripcion = ? , cupo =?, costo =?,id_Persona =? WHERE id_Curso = ?;";
 
-            PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            statement.setString(1, curso.getNombre());
-            statement.setString(2,curso.getDescripcion());
-            statement.setInt(3,curso.getCupo());
-            statement.setInt(4,curso.getCosto());
-            statement.setInt(5, curso.getPersona().getId());
-            statement.setInt(6, curso.getId());
+        PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        statement.setString(1, curso.getNombre());
+        statement.setString(2,curso.getDescripcion());
+        statement.setInt(3,curso.getCupo());
+        statement.setInt(4,curso.getCosto());
+        statement.setInt(5, curso.getPersona().getId());
+        statement.setInt(6, curso.getId());
             
            
             statement.executeUpdate();
-            
-          
+                   
             statement.close();
     
         } catch (SQLException ex) {
             System.out.println("Error al insertar un alumno: " + ex.getMessage());
-        }
-    
+        }   
     }
      }

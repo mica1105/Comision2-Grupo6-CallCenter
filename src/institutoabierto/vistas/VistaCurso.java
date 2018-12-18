@@ -175,37 +175,39 @@ public class VistaCurso extends javax.swing.JInternalFrame {
                         .addGap(136, 136, 136)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7)
-                            .addComponent(Guardar))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(124, 124, 124)
-                                .addComponent(Limpiar))
+                                .addGap(42, 42, 42)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel7)))
                             .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(Guardar)
                                 .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(Actualizar)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(Borrar))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(cDescripcion)
-                                        .addComponent(cNombre)
-                                        .addComponent(cCosto)
-                                        .addComponent(cCupo)
-                                        .addComponent(Responsable, 0, 154, Short.MAX_VALUE)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(cId, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(Buscar))))))))
-                .addContainerGap(79, Short.MAX_VALUE))
+                                .addComponent(Actualizar)))
+                        .addGap(10, 10, 10)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(cDescripcion)
+                                .addComponent(cNombre)
+                                .addComponent(cCosto)
+                                .addComponent(cCupo)
+                                .addComponent(Responsable, 0, 154, Short.MAX_VALUE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(cId, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(Buscar)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(8, 8, 8)
+                                .addComponent(Borrar)
+                                .addGap(18, 18, 18)
+                                .addComponent(Limpiar)))))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -236,14 +238,13 @@ public class VistaCurso extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel7)
                     .addComponent(Responsable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
-                .addComponent(Limpiar)
-                .addGap(18, 18, 18)
+                .addGap(61, 61, 61)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Guardar)
                     .addComponent(Actualizar)
-                    .addComponent(Borrar))
-                .addGap(56, 56, 56))
+                    .addComponent(Borrar)
+                    .addComponent(Limpiar)
+                    .addComponent(Guardar))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
@@ -283,7 +284,8 @@ public class VistaCurso extends javax.swing.JInternalFrame {
     private void BorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BorrarActionPerformed
         // TODO add your handling code here:
         int id=Integer.parseInt(cId.getText());
-        cursoData.borrarCurso(id);
+        CursoData cd= new CursoData(conexion);
+        cd.borrarCurso(id);
     }//GEN-LAST:event_BorrarActionPerformed
 
     private void ActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActualizarActionPerformed
@@ -295,8 +297,8 @@ public class VistaCurso extends javax.swing.JInternalFrame {
             int costo=Integer.parseInt(cCosto.getText());           
             Persona p=(Persona)Responsable.getSelectedItem();
             
-            Curso curso=new Curso(nombre,descripcion,cupo,costo,p);
-             cursoData.actualizarCurso(curso);      
+            Curso curso=new Curso(Integer.parseInt(cId.getText()),nombre,descripcion,cupo,costo,p);
+             cursoData.actualizarCurso(curso);     
         }
     }//GEN-LAST:event_ActualizarActionPerformed
 

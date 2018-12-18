@@ -5,6 +5,7 @@
  */
 package institutoabierto.vistas;
 
+import institutoAbiertoModelo.*;
 import institutoAbiertoModelo.Conexion;
 import institutoAbiertoModelo.Curso;
 import institutoAbiertoModelo.CursoData;
@@ -21,13 +22,13 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Matias
  */
-public class VistaListaDeCursos extends javax.swing.JInternalFrame {
+public class VistaCursosPorAlumno extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form VistaListaDeCursos
+     * Creates new form VistaCursosPorAlumno
      */
     private DefaultTableModel modelo;
-    private  ArrayList<Curso> listaCursos;
+    private ArrayList<Curso> listaCursos;
     private ArrayList<Matricula> listaMatriculas;
     private CursoData cursoData;
     private MatriculaData matriculaData;
@@ -35,9 +36,10 @@ public class VistaListaDeCursos extends javax.swing.JInternalFrame {
     private ArrayList<Persona> listaPersonas;
     private Conexion conexion;
     
-    public VistaListaDeCursos() {
+    public VistaCursosPorAlumno() {
+         try {
         initComponents();
-        try {
+      
             
             conexion = new Conexion("jdbc:mysql://localhost/InstitutoAbierto", "root", "");
             modelo=new DefaultTableModel();
@@ -54,10 +56,11 @@ public class VistaListaDeCursos extends javax.swing.JInternalFrame {
            
             cargarPersonas();
             armaCabeceraTabla();
+            cargaDatos();
             
             
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(VistaListaDeCursos.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(VistaCursosPorAlumno.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -77,8 +80,6 @@ public class VistaListaDeCursos extends javax.swing.JInternalFrame {
         cbPersona = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         tCursos = new javax.swing.JTable();
-        rbMatriculados = new javax.swing.JRadioButton();
-        rbNoMatriculados = new javax.swing.JRadioButton();
         jbSalir = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -94,15 +95,17 @@ public class VistaListaDeCursos extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        setBackground(new java.awt.Color(51, 153, 255));
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
-        jLabel1.setText("Cursos Disponibles");
+        jLabel1.setFont(new java.awt.Font("Comic Sans MS", 1, 20)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 102));
+        jLabel1.setText("\"Cursos Por Alumno\"");
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         jLabel2.setText("Alumno:");
 
         cbPersona.addActionListener(new java.awt.event.ActionListener() {
@@ -111,33 +114,22 @@ public class VistaListaDeCursos extends javax.swing.JInternalFrame {
             }
         });
 
+        tCursos.setBackground(new java.awt.Color(204, 255, 204));
         tCursos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6"
             }
         ));
         jScrollPane2.setViewportView(tCursos);
 
-        rbMatriculados.setText("Matriculados");
-        rbMatriculados.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbMatriculadosActionPerformed(evt);
-            }
-        });
-
-        rbNoMatriculados.setText("No Matriculados");
-        rbNoMatriculados.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbNoMatriculadosActionPerformed(evt);
-            }
-        });
-
+        jbSalir.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jbSalir.setForeground(new java.awt.Color(0, 0, 204));
         jbSalir.setText("Salir");
         jbSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -150,60 +142,40 @@ public class VistaListaDeCursos extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(82, 82, 82)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(rbMatriculados)
-                                .addGap(55, 55, 55)
-                                .addComponent(rbNoMatriculados))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cbPersona, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 14, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jbSalir, javax.swing.GroupLayout.Alignment.TRAILING))))
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jbSalir)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(141, 141, 141)
+                            .addComponent(jLabel2)
+                            .addGap(31, 31, 31)
+                            .addComponent(cbPersona, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(41, 41, 41)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(189, 189, 189)
+                            .addComponent(jLabel1))))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
                 .addComponent(jLabel1)
-                .addGap(30, 30, 30)
+                .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(cbPersona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rbMatriculados)
-                    .addComponent(rbNoMatriculados))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(49, 49, 49)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                 .addComponent(jbSalir)
-                .addGap(6, 6, 6))
+                .addGap(19, 19, 19))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void rbMatriculadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbMatriculadosActionPerformed
-        // TODO add your handling code here:
-        rbNoMatriculados.setSelected(false);
-        cargarDatosMatriculados();
-    }//GEN-LAST:event_rbMatriculadosActionPerformed
-
-    private void rbNoMatriculadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbNoMatriculadosActionPerformed
-        // TODO add your handling code here:
-        rbMatriculados.setSelected(false);
-        cargarDatosNoMatriculados();
-    }//GEN-LAST:event_rbNoMatriculadosActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
         // TODO add your handling code here:
@@ -212,10 +184,13 @@ public class VistaListaDeCursos extends javax.swing.JInternalFrame {
 
     private void cbPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPersonaActionPerformed
         // TODO add your handling code here:
-        borraFilasTabla();
+        cargaDatos();
+       
+
     }//GEN-LAST:event_cbPersonaActionPerformed
 
-public void cargarPersonas(){
+   
+    public void cargarPersonas(){
     for(Persona item:listaPersonas){
             cbPersona.addItem(item);
     }
@@ -229,6 +204,7 @@ public void armaCabeceraTabla(){
         columnas.add("Descripcion");
         columnas.add("Cupo");
         columnas.add("Costo");
+        columnas.add("Responsable");
         for(Object it:columnas){
         
             modelo.addColumn(it);
@@ -238,39 +214,27 @@ public void armaCabeceraTabla(){
 
 public void borraFilasTabla(){
 
-   int a =modelo.getRowCount()-1;
+   int a=modelo.getRowCount()-1;
 
 for(int i=a;i>=0;i--){
    
-modelo.removeRow(i );
+modelo.removeRow(i);
 }
 }
-public void cargarDatosNoMatriculados(){
-    
-      borraFilasTabla();
-          //Llenar filas
-        MatriculaData md =new MatriculaData(conexion);
-        Persona seleccionado=(Persona)cbPersona.getSelectedItem();
-        listaCursos = (ArrayList)md.obtenerCursosNoMatriculados(seleccionado.getId());
-        for(Curso c:listaCursos){
-        
-            modelo.addRow(new Object[]{c.getId(),c.getNombre(),c.getDescripcion(),c.getCupo(),c.getCosto()});
-                
-        }   
-    }
-public void cargarDatosMatriculados(){
-    
-      borraFilasTabla();
-          //Llenar filas
-        MatriculaData md =new MatriculaData(conexion);
-        Persona seleccionado=(Persona)cbPersona.getSelectedItem();
-        listaCursos = (ArrayList)md.obtenerCursosMatriculados(seleccionado.getId());
-        for(Curso c:listaCursos){
-        
-            modelo.addRow(new Object[]{c.getId(),c.getNombre(),c.getDescripcion(),c.getCupo(),c.getCosto()});
-                
-        }   
-    }
+ public void cargaDatos(){
+     
+       borraFilasTabla();
+            
+       Persona per=(Persona)cbPersona.getSelectedItem();
+       
+       for(Matricula m:listaMatriculas){
+           if(m.getPersona().getId()==per.getId()){
+           
+            modelo.addRow(new Object[]{m.getCurso().getId(),m.getCurso().getNombre(),m.getCurso().getDescripcion(),m.getCurso().getCupo(),m.getCurso().getCosto(),m.getCurso().getPersona()});
+           }  
+       }
+            
+ }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<Persona> cbPersona;
     private javax.swing.JLabel jLabel1;
@@ -279,8 +243,6 @@ public void cargarDatosMatriculados(){
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JButton jbSalir;
-    private javax.swing.JRadioButton rbMatriculados;
-    private javax.swing.JRadioButton rbNoMatriculados;
     private javax.swing.JTable tCursos;
     // End of variables declaration//GEN-END:variables
 }

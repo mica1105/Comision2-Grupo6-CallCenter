@@ -19,6 +19,7 @@ public class Curso {
     }
 
     public Curso(String nombre, String descripcion, int cupo, int costo, Persona persona) {
+        this.id= -1;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.cupo = cupo;
