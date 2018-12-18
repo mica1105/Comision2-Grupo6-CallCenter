@@ -10,6 +10,7 @@ import institutoAbiertoModelo.PersonaData;
 import institutoAbiertoModelo.Persona;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -245,8 +246,9 @@ import java.util.logging.Logger;
             
              Persona persona=new Persona(nombre,dni,celular);
              personaData.actualizarPersona(persona);
-}  
-
+}  else{
+   JOptionPane.showMessageDialog(this, "Los campos neceserios no han sido completados", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);         
+            }
     }//GEN-LAST:event_ActualizarActionPerformed
 
     private void BorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BorrarActionPerformed
@@ -264,6 +266,8 @@ import java.util.logging.Logger;
                 cNombre.setText(persona.getNombre());
                 cDNI.setText(persona.getDni()+"");
                 cCelular.setText(persona.getCelular()+"");    
+        }else{
+    JOptionPane.showMessageDialog(this, "El id ingresado no se encuentra registrado", "ERROR", JOptionPane.ERROR_MESSAGE);        
         }
     }//GEN-LAST:event_BuscarActionPerformed
 

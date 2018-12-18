@@ -17,6 +17,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -282,8 +283,10 @@ public class VistaMatricula extends javax.swing.JInternalFrame {
        Matricula matricula = new Matricula (fechaInscripcion,costo, p, c);
        if(cursoData.hayDisponibilidad(c.getId())&& c.getCosto()== costo){
         matriculaData.guardarMatricula(matricula);
-       }
        jtId.setText(matricula.getId()+"");
+       } else{
+           JOptionPane.showMessageDialog(this, "El curso seleccionado no cuenta con cupo disponible o el costo ingresado no es correcto", "ERROR LA MATRICULA NO SE HA GUARDADO", JOptionPane.ERROR_MESSAGE);
+       }
     }//GEN-LAST:event_btGuardarActionPerformed
 
     private void btBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBorrarActionPerformed
@@ -315,6 +318,8 @@ public class VistaMatricula extends javax.swing.JInternalFrame {
                 cbPersonas.setSelectedItem(matricula.getPersona().getId()+"-"+matricula.getPersona().getNombre());
                 cbCursos.setSelectedItem(matricula.getCurso().getId()+"-"+matricula.getCurso().getNombre());
                 //Persona p=(Persona)Responsable.getSelectedItem();
+        }else{
+            JOptionPane.showMessageDialog(this, "El id ingresado no se encuentra registrado", "ERROR", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_btBuscarActionPerformed
     }
     private void cargarPersonas(){

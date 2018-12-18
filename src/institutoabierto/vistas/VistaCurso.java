@@ -17,6 +17,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -278,7 +279,9 @@ public class VistaCurso extends javax.swing.JInternalFrame {
                 cCosto.setText(curso.getCosto()+"");
                 Responsable.setSelectedItem(curso.getPersona().getId()+"-"+curso.getPersona().getNombre());
                 //Persona p=(Persona)Responsable.getSelectedItem();
-        }           
+        } else{
+            JOptionPane.showMessageDialog(this, "El id ingresado no se encuentra registrado", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }          
     }//GEN-LAST:event_BuscarActionPerformed
 
     private void BorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BorrarActionPerformed
@@ -299,7 +302,9 @@ public class VistaCurso extends javax.swing.JInternalFrame {
             
             Curso curso=new Curso(Integer.parseInt(cId.getText()),nombre,descripcion,cupo,costo,p);
              cursoData.actualizarCurso(curso);     
-        }
+        } else {
+                JOptionPane.showMessageDialog(this, "Los campos neceserios no han sido completados", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
+            }
     }//GEN-LAST:event_ActualizarActionPerformed
 
     private void ResponsableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResponsableActionPerformed
