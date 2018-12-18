@@ -283,9 +283,9 @@ public class VistaCurso extends javax.swing.JInternalFrame {
 
     private void BorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BorrarActionPerformed
         // TODO add your handling code here:
-        int id=Integer.parseInt(cId.getText());
-        CursoData cd= new CursoData(conexion);
-        cd.borrarCurso(id);
+        int id_Curso=Integer.parseInt(cId.getText());
+        Persona p=(Persona)Responsable.getSelectedItem();
+        cursoData.borrarCurso(id_Curso,p.getId());
     }//GEN-LAST:event_BorrarActionPerformed
 
     private void ActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActualizarActionPerformed

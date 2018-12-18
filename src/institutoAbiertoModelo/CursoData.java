@@ -309,13 +309,15 @@ public class CursoData {
         return curso; 
 
 }
-public void borrarCurso(int id_Curso){
-    try {
+public void borrarCurso(int id_Curso, int id_Persona){
+      try {
             
-            String sql = "DELETE FROM curso WHERE id_Curso =?;";
+            String sql = "DELETE FROM curso WHERE id_Curso = ? AND id_Persona = ?;";
 
             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setInt(1, id_Curso);
+            statement.setInt(2, id_Persona);
+            
            
             
             statement.executeUpdate();
@@ -324,7 +326,7 @@ public void borrarCurso(int id_Curso){
             statement.close();
     
         } catch (SQLException ex) {
-            System.out.println("Error al insertar un alumno: " + ex.getMessage());
+            System.out.println("Error al insertar el id: " + ex.getMessage());
         }
         
     

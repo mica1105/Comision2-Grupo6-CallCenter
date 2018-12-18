@@ -280,7 +280,7 @@ public class VistaMatricula extends javax.swing.JInternalFrame {
         Persona p=(Persona)cbPersonas.getSelectedItem();
         Curso c= (Curso) cbCursos.getSelectedItem();
        Matricula matricula = new Matricula (fechaInscripcion,costo, p, c);
-       if(cursoData.hayDisponibilidad(c.getId())){
+       if(cursoData.hayDisponibilidad(c.getId())&& c.getCosto()== costo){
         matriculaData.guardarMatricula(matricula);
        }
        jtId.setText(matricula.getId()+"");
