@@ -277,9 +277,9 @@ public class VistaMatricula extends javax.swing.JInternalFrame {
     private void btGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGuardarActionPerformed
         // TODO add your handling code here:
         LocalDate fechaInscripcion= LocalDate.parse(jtFecha.getText(),DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        int costo=Integer.parseInt(jtCosto.getText());
         Persona p=(Persona)cbPersonas.getSelectedItem();
         Curso c= (Curso) cbCursos.getSelectedItem();
+        int costo=Integer.parseInt(jtCosto.getText());
        Matricula matricula = new Matricula (fechaInscripcion,costo, p, c);
        if(cursoData.hayDisponibilidad(c.getId())&& c.getCosto()== costo){
         matriculaData.guardarMatricula(matricula);
@@ -315,8 +315,14 @@ public class VistaMatricula extends javax.swing.JInternalFrame {
                 jtId.setText(matricula.getId()+"");
                 jtFecha.setText(matricula.getFechaInscripcion().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
                 jtCosto.setText(matricula.getCosto()+"");
-                cbPersonas.setSelectedItem(matricula.getPersona().getId()+"-"+matricula.getPersona().getNombre());
-                cbCursos.setSelectedItem(matricula.getCurso().getId()+"-"+matricula.getCurso().getNombre());
+                for(Persona item:listaPersonas){
+                if(item.getId() == matricula.getPersona().getId())
+                cbPersonas.setSelectedItem(item);
+                }
+                for(Curso item:listaCursos){
+                if(item.getId() == matricula.getCurso().getId())
+                cbCursos.setSelectedItem(item);
+                }
                 //Persona p=(Persona)Responsable.getSelectedItem();
         }else{
             JOptionPane.showMessageDialog(this, "El id ingresado no se encuentra registrado", "ERROR", JOptionPane.ERROR_MESSAGE);

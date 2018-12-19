@@ -277,7 +277,10 @@ public class VistaCurso extends javax.swing.JInternalFrame {
                 cDescripcion.setText(curso.getDescripcion());
                 cCupo.setText(curso.getCupo()+"");
                 cCosto.setText(curso.getCosto()+"");
-                Responsable.setSelectedItem(curso.getPersona().getId()+"-"+curso.getPersona().getNombre());
+                for(Persona item:listaPersonas){
+                        if(item.getId() == curso.getPersona().getId())
+                        Responsable.setSelectedItem(item);
+                }         
                 //Persona p=(Persona)Responsable.getSelectedItem();
         } else{
             JOptionPane.showMessageDialog(this, "El id ingresado no se encuentra registrado", "ERROR", JOptionPane.ERROR_MESSAGE);
