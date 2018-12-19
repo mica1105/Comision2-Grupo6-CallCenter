@@ -284,6 +284,7 @@ public class VistaMatricula extends javax.swing.JInternalFrame {
        if(cursoData.hayDisponibilidad(c.getId())&& c.getCosto()== costo){
         matriculaData.guardarMatricula(matricula);
        jtId.setText(matricula.getId()+"");
+       JOptionPane.showMessageDialog(this, "La Matricula ha sido exitosa", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
        } else{
            JOptionPane.showMessageDialog(this, "El curso seleccionado no cuenta con cupo disponible o el costo ingresado no es correcto", "ERROR LA MATRICULA NO SE HA GUARDADO", JOptionPane.ERROR_MESSAGE);
        }
@@ -295,7 +296,7 @@ public class VistaMatricula extends javax.swing.JInternalFrame {
          Curso c= (Curso) cbCursos.getSelectedItem();
          MatriculaData md= new MatriculaData(conexion);
         md.borrarMatriculaDeUnCursoDeunaPersona(p.getId(), c.getId());
-        
+       JOptionPane.showMessageDialog(this, "La Matricula ha sido Elimida satisfactoriamente", "INFORMACION", JOptionPane.INFORMATION_MESSAGE); 
     }//GEN-LAST:event_btBorrarActionPerformed
 
     private void btLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLimpiarActionPerformed

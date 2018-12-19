@@ -263,6 +263,7 @@ public class VistaCurso extends javax.swing.JInternalFrame {
         cursoData.guardarCurso(curso);
         
         cId.setText(curso.getId()+"");
+        JOptionPane.showMessageDialog(this, "El Curso ha sido Guardado satisfactoriamente", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_GuardarActionPerformed
 
     private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
@@ -292,6 +293,7 @@ public class VistaCurso extends javax.swing.JInternalFrame {
         int id_Curso=Integer.parseInt(cId.getText());
         Persona p=(Persona)Responsable.getSelectedItem();
         cursoData.borrarCurso(id_Curso,p.getId());
+        JOptionPane.showMessageDialog(this, "El ha sido Eliminado satisfactoriamente", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_BorrarActionPerformed
 
     private void ActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActualizarActionPerformed
@@ -305,6 +307,7 @@ public class VistaCurso extends javax.swing.JInternalFrame {
             
             Curso curso=new Curso(Integer.parseInt(cId.getText()),nombre,descripcion,cupo,costo,p);
              cursoData.actualizarCurso(curso);     
+             JOptionPane.showMessageDialog(this, "El Curso ha sido Actualizada satisfactoriamente", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
         } else {
                 JOptionPane.showMessageDialog(this, "Los campos neceserios no han sido completados", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
             }

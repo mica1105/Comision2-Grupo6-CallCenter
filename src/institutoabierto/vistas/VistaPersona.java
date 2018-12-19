@@ -233,7 +233,7 @@ import javax.swing.JOptionPane;
            personaData.guardarPersona(persona);
         
            cId.setText(persona.getId()+"");             
-    
+    JOptionPane.showMessageDialog(this, "La Persona ha sido Registrada satisfactoriamente", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_GuardarActionPerformed
 
     private void ActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActualizarActionPerformed
@@ -244,10 +244,11 @@ import javax.swing.JOptionPane;
             int dni=Integer.parseInt(cDNI.getText());
             int celular=Integer.parseInt(cCelular.getText());
             
-             Persona persona=new Persona(nombre,dni,celular);
+             Persona persona=new Persona(Integer.parseInt(cId.getText()),nombre,dni,celular);
              personaData.actualizarPersona(persona);
-}  else{
-   JOptionPane.showMessageDialog(this, "Los campos neceserios no han sido completados", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);         
+        JOptionPane.showMessageDialog(this, "La Persona ha sido Actualizada satisfactoriamente", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);    
+ }  else {JOptionPane.showMessageDialog(this, "El idno pertenece a un usuario registrado", "ERROR", JOptionPane.ERROR_MESSAGE);
+                
             }
     }//GEN-LAST:event_ActualizarActionPerformed
 
@@ -255,6 +256,7 @@ import javax.swing.JOptionPane;
         // TODO add your handling code here:
         int id=Integer.parseInt(cId.getText());
         personaData.borrarPersona(id);
+        JOptionPane.showMessageDialog(this, "La Persona ha sido Borrada satisfactoriamente", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_BorrarActionPerformed
 
     private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
