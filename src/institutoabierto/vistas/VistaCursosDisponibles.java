@@ -148,10 +148,10 @@ public class VistaCursosDisponibles extends javax.swing.JInternalFrame {
         });
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel3.setText("1. Si desea inscribirseen alguno de los mismo debera registrarse ");
+        jLabel3.setText("1. Si desea inscribirse en alguno de los cursos que brinda este instituto primero debe registrarse como alumno.");
 
         jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel4.setText("3. El costo de matriculacion es proporcional al costo de curso");
+        jLabel4.setText("3. El costo de matriculacion es proporcional al costo de curso.");
 
         jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel5.setText("2. Luego dirigirse a matriculacion y seleccionar su nombre y el curso de su  interés.");
@@ -172,9 +172,6 @@ public class VistaCursosDisponibles extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 661, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4)))
@@ -183,8 +180,11 @@ public class VistaCursosDisponibles extends javax.swing.JInternalFrame {
                         .addComponent(jLabel2))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(135, 135, 135)
-                        .addComponent(jLabel1)))
-                .addContainerGap(53, Short.MAX_VALUE))
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 689, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
