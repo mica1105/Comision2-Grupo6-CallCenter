@@ -242,7 +242,7 @@ public class Principal extends javax.swing.JFrame {
         jMenu14.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
 
         jMenuItem7.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
-        jMenuItem7.setText("Cursos Disponibles");
+        jMenuItem7.setText("Requisitos para Matriculación");
         jMenuItem7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
